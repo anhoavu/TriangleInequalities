@@ -1,0 +1,125 @@
+\documentclass[10pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{Another Distance}
+\author{An Hoa Vu}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\R}{\mathbb{R}}
+
+Let $f(t) = t \log t$. For $a, b > 0$, define
+$$d(a, b) = \sqrt{\frac{f(a) + f(b)}{2} - f\left(\frac{a + b}{2}\right)}$$
+then $d(a, b)$ is a metric on $\R^+$.
+
+\begin{proof}
+First, $d$ is well-defined because $f(t)$ is a convex function i.e. $f''(t) = \frac{1}{t} > 0$ for $t > 0$.
+
+The main thing to prove is the triangle inequality. But first, observe that
+\begin{align*}
+d(a, b) &= \sqrt{\frac{a \log a + b \log b}{2} - \left(\frac{a + b}{2}\right) \log \frac{a + b}{2}}\\
+&= \sqrt{\frac{1}{2} \left(a \log a + b \log b - (a + b) \log \frac{a + b}{2}\right)}\\
+&= \sqrt{\frac{1}{2} \left(a \left[\log a - \log \frac{a + b}{2}\right] + b \left[\log b -\log \frac{a + b}{2}\right]\right)}\\
+&= \sqrt{\frac{1}{2} \left(a \log \frac{2a}{a + b} + b \log \frac{2b}{a + b}\right)}\\
+&= \sqrt{\frac{a + b}{2} \left( \frac{a}{a + b} \log \frac{2a}{a + b} + \frac{b}{a + b} \log \frac{2b}{a + b}\right)}\\
+&= \sqrt{\frac{a + b}{2}} \; K\left(\frac{a}{a + b}\right)
+\end{align*}
+where the function $[0, 1] \rightarrow \R_{\geq 0}$ is given by
+$$K(t) := \sqrt{t \log (2t) + (1-t) \log (2(1-t))} = \sqrt{\frac{f(2t) + f(2-2t)}{2}}.$$
+
+Note that $K$ is undefined at $t = 0$ and $t = 1$ but we can extend it by continuity or by defining $f(0) = \lim_{t \rightarrow 0^+} f(t) = 0$. Obviously, $K$ satisfies the functional equation
+$$K(t) = K(1-t).$$
+
+Continuing, we further have
+\begin{align*}
+d(a, b) &= \sqrt{\frac{a}{2}\left(1 + \frac{b}{a}\right)} \; K\left(\frac{1}{1 + \frac{b}{a}}\right)\\
+&= \sqrt{\frac{a}{2}} \; k\left(\frac{b}{a}\right)
+\end{align*}
+where the function $k : \R_{\geq 0} \rightarrow \R_{\geq 0}$ is given by
+\begin{align*}
+k(s) &:= \sqrt{1 + s} \; K\left(\frac{1}{1 + s}\right)\\
+&= \sqrt{1 + s} \sqrt{\frac{1}{1 + s} \log \frac{2}{1 + s} + \frac{s}{1 + s} \log \frac{2s}{1 + s}}\\
+&= \sqrt{\log \frac{2}{1 + s} + s \log \frac{2s}{1 + s}}
+\end{align*}
+Note that:
+\begin{itemize}
+\item The above formula for $k$ is undefined at $s = 0$ but we can extend by taking
+$$k(0) = \lim_{s \rightarrow 0^+} k(s) = 0$$
+so that $k$ is also continuous at $0$.
+
+\item From the functional equation for $K(s)$ or by symmetry $d(s, 1) = d(1, s)$, we can see that $k$ satisfies the functional equation
+\begin{equation}
+\sqrt{s} \; k\left(\frac{1}{s}\right) = k(s)
+\label{eq:func_equation_k}
+\end{equation}
+
+\item Also,
+$$k'(s) = \frac{\log\frac{2s}{1 + s}}{2 k(s)}$$
+so the sign of $k'(s)$ is the same as the sign of $\log\frac{2s}{1 + s}$ and so the function $k(s)$ is increasing on $[1, +\infty)$ and decreasing on $(0, 1)$.
+\end{itemize}
+
+Now the triangle inequality
+\begin{align}
+&d(a, b) \leq d(a, c) + d(b, c) \notag\\
+\iff &\sqrt{\frac{a}{2}} \; k\left(\frac{b}{a}\right) \leq \sqrt{\frac{c}{2}} \; k\left(\frac{a}{c}\right) + \sqrt{\frac{c}{2}} \; k\left(\frac{b}{c}\right) \notag\\
+\iff &\sqrt{\frac{a}{c}} \; k\left(\frac{b}{a}\right) \leq k\left(\frac{a}{c}\right) + k\left(\frac{b}{c}\right) \label{ineq:triangle}
+\end{align}
+To prove this inequality, we can assume without loss of generality that $a \leq b$ by symmetry. Perform the change of variable $x = \frac{b}{a} \geq 1$ and $y = \frac{a}{c}$ in \eqref{ineq:triangle}, it suffices to show the equivalent inequality
+\begin{align*}
+\eqref{ineq:triangle} &\iff \sqrt{y} \; k(x) \leq k(y) + k(xy)\\
+&\iff \frac{k(x)}{\sqrt{x}} \leq \frac{k(y)}{\sqrt{xy}} + \frac{k(xy)}{\sqrt{xy}}
+\end{align*}
+for all $x \geq 1$ and $y > 0$.
+
+\begin{itemize}
+
+\item If $y \geq 1$: Note that similar to the function $k(s)$, the function $s \mapsto \frac{k(s)}{\sqrt{s}}$ is increasing on $[1, +\infty)$. We remark that one shouldn't check $\frac{k(s)}{\sqrt{s}}$ is increasing: Check that $\frac{k(s)^2}{s}$ is increasing instead!
+
+So when $y \geq 1$, we have $1 \leq x \leq xy$ and thus, even the stronger $$\frac{k(x)}{\sqrt{x}} \leq \frac{k(xy)}{\sqrt{xy}}$$ is true.
+
+\item Now let $y \in (0, 1)$ be arbitrary. If $1 \leq x \leq \frac{1}{y}$ then again due to the fact that $k(s)$ is increasing on $[1, +\infty)$, we have the stronger
+$$\sqrt{y} \; k(x) \leq \sqrt{y} \; k\left(\frac{1}{y}\right) = k(y)$$
+where the second equality is because of \eqref{eq:func_equation_k}.
+
+So it remains to consider the case $x > \frac{1}{y} > 1$. Consider the following function on $(\frac{1}{y}, +\infty)$:
+$$h(x) = k(xy) + k(y) - \sqrt{y} \, k(x).$$
+We want to show that $h(x)$ is increasing by showing that $h'(x) > 0$ on the aforementioned interval so $h(x) \geq h(\frac{1}{y}) = 0$ which is \eqref{ineq:triangle}:
+\begin{align*}
+h'(x) > 0 &\iff y k'(xy) - \sqrt{y} \, k'(x) > 0\\
+&\iff \sqrt{xy} \; k'(xy) > \sqrt{x} \; k'(x)\\
+&\iff g(xy) > g(x)
+\end{align*}
+where $g(s) := \sqrt{s} \; k'(s)$. This final inequality $g(xy) > g(x)$ is true because $g(s)$ is a decreasing function on $(1, +\infty)$ and here $1 < xy < x$.
+\end{itemize}
+
+To prove the final claim about $g$ decreasing, we employ the trick as before to show instead that
+\begin{align*}
+\frac{1}{4g(s)^2} &= \frac{k(s)^2}{s \log^2 \frac{2s}{1 + s}}\\
+&= \frac{\log \frac{2}{1 + s} + s \log \frac{2s}{1 + s}}{s \log^2 \frac{2s}{1 + s}}
+\end{align*}
+is increasing on $(1, +\infty)$. Now this is a complicated expression but we could make a change of variable
+$$u = u(s) = \frac{2s}{1 + s} = 2 - \frac{2}{1 + u}$$
+so
+$$\frac{2}{1+s} = 2 - u \qquad \text{ and } \qquad s = \frac{u}{2 - u}.$$
+Observe that as $s \in (1, +\infty)$, $u \in (1, 2)$ and $u$ increases as $s$ increases. We have
+\begin{align*}
+\frac{1}{4g(s)^2} &= \frac{\log(2 - u) + \frac{u}{2 - u} \log u}{\frac{u}{2 - u} \log^2 u}\\
+&= \frac{u \log u + (2-u) \log(2-u)}{u \log^2 u}\\
+&= G(u(s))
+\end{align*}
+where
+$$G(u) := \frac{u \log u + (2-u) \log(2-u)}{u \log^2 u}$$
+Proving that $g(s)$ is decreasing is equivalent to proving that $G(u)$ is increasing on $(1, 2)$. We have
+$$G'(u) = - 2 \frac{u \log(u) + (2 - u) \log(2 - u) + \log(u) \log(2 - u)}{u^2 \log^3 (u)}$$
+
+The numerator of the above function
+$$J(u) := u \log(u) + (2 - u) \log(2 - u) + \log(u) \log(2 - u)$$
+has
+$$J'(u) = \frac{(u - 1) \left[ (u - 2) \log(2 - u) - u \log(u) \right]}{u (2 - u)} = -\frac{(u - 1) \; [f(2-u) + f(u)]}{u(2-u)} < 0$$
+for all $u \in (1, 2)$ for then $u, u - 1, 2 - u > 0$ and also $f(u) + f(2 - u) > 2 f(1) = 0$ thank to convexity of $f$. So $J(u)$ is decreasing which means $J(u) < J(1) = 0$ and that implies
+$$G'(u) = \frac{-2J(u)}{u^2 \log^3(u)} > 0 \qquad \text{ for all } u \in (1, 2).$$
+\end{proof}
+
+\end{document}

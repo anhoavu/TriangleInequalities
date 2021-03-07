@@ -1,0 +1,104 @@
+\documentclass[10pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{Log Distance}
+\author{An Hoa Vu}
+
+\begin{document}
+
+\maketitle
+
+(Survit Sra, MIT 2013, Lemma 3.4. of POSITIVE DEFINITE MATRICES AND THE S-DIVERGENCE) Prove that
+$$d_L(a, b) = \sqrt{\log \frac{a + b}{2\sqrt{ab}}}$$
+is a distance function on $\mathbb{R}^+$.
+
+\newcommand{\g}[2]{g\left(\frac{#1}{#2}\right)}
+
+\begin{proof}
+Obviously, $d_L(a, b) = 0 \iff a = b$ by AM-GM inequality. Also, $d_L(a, b) = d_L(b, a)$ is clear. It remains to show that
+\begin{equation}
+d_L(a, b) \leq d_L(a, c) + d_L(b, c)
+\label{eq:triangle_ineq}
+\end{equation}
+for all $a, b, c > 0$. First, let us rewrite
+\begin{align*}
+d_L(a, b) &= \sqrt{\log \frac{1}{2} \left( {\sqrt{\frac{a}{b}} + \sqrt{\frac{b}{a}}} \right)}\\
+&= \sqrt{\log f \left( \sqrt{\frac{a}{b}} \right)}\\
+&= \g{a}{b} = \g{b}{a}
+\end{align*}
+where
+$$f(x) = \frac{1}{2}\left(x + \frac{1}{x}\right)$$
+and
+$$g(x) = \sqrt{\log f(\sqrt{x})}.$$
+
+Observe that the functions $f(x)$ is increasing on the interval $(1, +\infty)$ and the functions $\log x$ and $\sqrt{x}$ are increasing on $(0, +\infty)$. Since $g$ is a composition $\sqrt{x} \circ \log \circ f \circ \sqrt{x}$ of functions increasing on $(1, +\infty)$, $g$ must be increasing on $(1, +\infty)$ as well. In other words, if $1 < x < y$ then $0 < g(x) < g(y)$.
+
+To prove \eqref{eq:triangle_ineq}, we can assume $a < b$ without loss of generality. (If $a = b$ then the inequality is obvious since the left hand side is 0 and right hand side is obviously $\geq 0$.)
+
+There are several possibilities for $c$:
+\begin{itemize}
+\item $c = a$ or $c = b$: \eqref{eq:triangle_ineq} is obvious for then one of the term on the RHS equals to the LHS.
+
+\item $c < a$ so $c$ is the smallest number amongst the $a, b, c$; i.e. $c < a < b$: then $\frac{a}{c}, \frac{b}{c}, \frac{b}{a} > 1$ and
+$$\eqref{eq:triangle_ineq} \iff \g{b}{a} \leq \g{a}{c} + \g{b}{c}$$
+which is true because then
+$$1 < \frac{b}{a} < \frac{b}{c}$$
+so we even have a stronger inequality
+$$\g{b}{a} < \g{b}{c}.$$
+
+\item $c > b$ so $c$ is the largest number amongst the $a, b, c$; in other words, $a < b < c$: Then
+$$\eqref{eq:triangle_ineq} \iff \g{b}{a} \leq \g{c}{a} + \g{c}{b}$$
+which is similarly true because
+$$1 < \frac{b}{a} < \frac{c}{a}.$$
+
+\item Finally, $a < c < b$ or $c$ is the middle number amongst the $a, b, c$: Then
+$$\eqref{eq:triangle_ineq} \iff \g{b}{a} \leq \g{c}{a} + \g{b}{c}$$
+Unfortunately, we cannot yet make any conclusion. But observe that it suffices to show that
+\begin{equation}
+g(X^2 Y^2) \leq g(X^2) + g(Y^2)
+\label{eq:simp_ineq}
+\end{equation}
+for all real numbers $X, Y > 1$. For then, we can plug in $X = \sqrt{\frac{c}{a}}$ and $Y = \sqrt{\frac{b}{c}}$ whence $XY = \sqrt{\frac{b}{a}}$ to get \eqref{eq:triangle_ineq}. Conversely, if the original inequality \eqref{eq:triangle_ineq} is true for all $a, b, c > 0$ then it must be true for $a = \frac{1}{X^2}, b = Y^2, c = 1$ which gives us \eqref{eq:simp_ineq}. By doing this, we \textbf{eliminate one variable} AND also the \textbf{inner square-root} as
+$$g(X^2) = \sqrt{\log f(\sqrt{X^2})} = \sqrt{\log f(X)}.$$
+Let $G(x) = g(x^2)$.
+
+For a fixed value of $Y > 1$, consider the function
+$$h(X) = g(X^2) + g(Y^2) - g(X^2Y^2) = G(X) + G(Y) - G(XY)$$
+as a function of $X$ only. We claim that this function is increasing on $[1, \infty)$ and so
+$$h(X) \geq h(1) = g(1) + g(Y) - g(Y) = g(1) = 0$$
+which proves our inequality \eqref{eq:simp_ineq}.
+
+To prove our claim, we show that $h'(X) > 0$ on $(1, \infty)$. One has
+$$h'(X) = G'(X) - Y G'(XY)$$
+and
+$$G'(x) = \frac{x^2 - 1}{2 x (x^2 + 1) G(x)}$$
+so
+\begin{align*}
+h'(X) > 0 &\iff G'(X) > Y G'(XY)\\
+&\iff \frac{X^2 - 1}{2 X (X^2 + 1) G(X)} > Y \frac{(XY)^2 - 1}{2 XY ((XY)^2 + 1) G(XY)}\\
+&\iff \frac{X^2 - 1}{(X^2 + 1) G(X)} > \frac{(XY)^2 - 1}{((XY)^2 + 1) G(XY)}\\
+&\iff \frac{(X^2 + 1) G(X)}{X^2 - 1} < \frac{((XY)^2 + 1) G(XY)}{(XY)^2 - 1}\\
+&\iff k(X) < k(XY)
+\end{align*}
+where the function
+$$k(x) = \frac{(x^2 + 1) G(x)}{x^2 - 1} = \left(1 + \frac{2}{x^2 - 1}\right) G(x).$$
+
+The final inequality is true because $X < XY$ (from assumption $Y > 1$) and $k(x)$ is an increasing function on $(1, +\infty)$ since
+$$k'(x) = \frac{-4x}{(x^2 - 1)^2} \; G(x) + \left(1 + \frac{2}{x^2 - 1}\right) G'(x)$$
+and so
+\begin{align*}
+k'(x) > 0 &\iff -4x G(x) + (x^4 - 1) G'(x) > 0\\
+&\iff (x^4 - 1) \frac{x^2 - 1}{2 x (x^2 + 1) G(x)} > 4x G(x)\\
+&\iff \frac{(x^2 - 1)^2}{x^2} > 8 G(x)^2 = 8 \log f(x)\\
+&\iff K(x) > 0
+\end{align*}
+where the function
+$$K(x) = \frac{(x^2 - 1)^2}{x^2} - 8 \log f(x).$$
+
+One has
+$$K'(x) = \frac{2 (x^2 - 1)^3}{x^3(x^2 + 1)}$$
+which is evidently positive on $(1, +\infty)$. Hence, $K(x)$ is increasing on $(1, +\infty)$ and so $K(x) \geq K(1) = 0$ with equality only achieved when $x = 1$.
+\end{itemize}
+\end{proof}
+
+\end{document}
