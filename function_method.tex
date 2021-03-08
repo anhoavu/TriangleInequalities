@@ -1,0 +1,73 @@
+\documentclass[10pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{thm}{Theorem}
+
+\title{The function method of solving inequalities in real variables}
+\author{An Hoa Vu}
+
+\begin{document}
+
+\maketitle
+
+\section{The Function Method}
+
+When I was in high school, my favourite result is a simple criterion to determine whether a function is increasing or decreasing using its first derivative (which is basically a consequence of \textbf{Mean Value Theorem}) namely
+
+\begin{thm}
+Suppose that $f$ is differentiable on $(a, b)$. Then if $f'(x) > 0$ for all $x$ in $(a, b)$ then $f$ is strictly increasing on $(a, b)$.
+\end{thm}
+\begin{proof}
+Let $x_1 < x_2$ be arbitrary on $(a, b)$. View $f$ as a function $[x_1, x_2] \rightarrow \mathbb{R}$. The assumption about $f$ implies that $f$ is continuous on $[x_1, x_2]$ and differentiable on the open interval $(x_1, x_2)$ so we can apply Mean Value Theorem to conclude
+$$\frac{f(x_2) - f(x_1)}{x_2 - x_1} = f'(c)$$
+for some $c \in (x_1, x_2)$. By assumption $f'(c) > 0$ and $x_2 - x_1 > 0$ so $f(x_2) - f(x_1) > 0$ which means $f(x_2) > f(x_1)$. We have shown that for any $x_1, x_2 \in (a, b)$, if $x_1 < x_2$ then $f(x_1) < f(x_2)$. So $f$ is strictly increasing.
+\end{proof}
+
+From the proof, it is clear that if we have $f'(x) \geq 0$ instead then we can conclude that $f$ is increasing (not necessarily strictly). Also, if we further have $f$ being continuous on $[a, b]$ then we can further conclude that $f$ is strictly increasing on $[a, b]$, not just $(a, b)$.
+
+From this theorem, I invented a method to solve many high school math olympiads inequalities, dubbed the \textbf{function method}, by viewing them as an inequality of the form $F(a) \geq 0$ (or $F(a) > 0$) by treating the other variables as constants and prove them by considering the derivative $F'(a)$.
+
+Let us take a simple example: The famous AM-GM inequality says that
+\begin{thm}[AM-GM inequality]
+If $x_1, ..., x_n$ are positive real numbers then
+$$x_1^n + ... + x_n^n \geq n x_1 ... x_n$$
+with equality happens only when $x_1 = x_2 = ... = x_n$.
+\end{thm}
+Note that actually, we only need positive when $n$ is odd. When $n$ is even, we can apply the inequality to $|x_i|$ in place of $x_i$.
+
+The proof is to use mathematical induction. Here is the function perspective: For fixed $x_2, ..., x_n > 0$, let us can consider the function
+$$F(x_1) = x_1^n + ... + x_n^n - n x_1 ... x_n$$
+of a single variable $x_1$. This function is differentiable for all $x_1$. One has
+$$F'(x_1) = n x_1^{n-1} - n x_2 ... x_n$$
+Obviously $F'(x_1) > 0$ if $x_1 > \sqrt[n-1]{x_2 ... x_n}$ and $F'(x_1) < 0$ if $x_1 < \sqrt[n-1]{x_2 ... x_n}$. Hence, the function $F(x_1)$ is increasing on $(\sqrt[n-1]{x_2 ... x_n}, +\infty)$ and decreasing on $(0, \sqrt[n-1]{x_2 ... x_n})$ and so we have
+$$F(x_1) \geq F(\sqrt[n-1]{x_2 ... x_n}).$$
+Now,
+\begin{align*}
+F(\sqrt[n-1]{x_2 ... x_n}) &= (\sqrt[n-1]{x_2 ... x_n})^n + x_2^n + ... + x_n^n - n (\sqrt[n-1]{x_2 ... x_n}) x_2 ... x_n\\
+&= x_2^n + ... + x_n^n - (n-1) \sqrt[n-1]{(x_2 ... x_n)^n}
+\end{align*}
+An attentive reader could realize that $F(\sqrt[n-1]{x_2 ... x_n}) \geq 0$ is nothing but the AM-GM inequalities for the $n-1$ numbers $\sqrt[n-1]{x_2^n}, ..., \sqrt[n-1]{x_n^n}$. So the theorem follows by mathematical induction with obvious base case $n = 0$.
+
+Evidently, this method is great for \emph{proving inequalities} but it does not help \emph{deriving inequalities}. How do we know or why do we expect that AM-GM is true in the first place? The reason that AM-GM is true is due to the fact that the function $f(x) = e^x$ is actually a \textbf{convex function} (its second derivative $f''(x) > 0$ for all $x$). In other words, the region above its graph $y \geq e^x$ is a convex domain which means that if we take two points in the region, the entire line segment connecting them belongs to the segment. It is well known that
+\begin{thm}[Jensen's inequality]
+If $f$ is a convex function then average of the $f$ is at least $f$ of the average i.e.
+$$\frac{f(t_1) + ... + f(t_n)}{n} \geq f\left(\frac{t_1 + ... + t_n}{n}\right)$$
+for all $t_1, ..., t_n$ in the domain of convexity.
+\end{thm}
+This reason can be easily seen from geometric perspective.
+
+Back to AM-GM, applying this fact to $t_1 = n \log(x_1)$, ..., $t_n = n \log(x_n)$ and we get it immediately.
+
+\section{Higher Dimension}
+
+When I learned multi-variable calculus in college, I realized that the 1-variable function result can be generalized to multi-variable. As we can see, the key theorem is about increasing/decreasing property of the function leading to the result about a function only achieves extrema (maximum/minimum) at either where the derivative vanishes or at the boundary. This is true for higher dimension as well. A differentiable function $F(x_1, ..., x_n)$ achieves minimum/maximum at either boundary or where all first partial derivatives $\frac{\partial F}{\partial x_1} = ... = \frac{\partial F}{\partial x_n} = 0$ simultaneously vanishes.
+
+Armed with this, AM-GM inequality can be solved by considering the $n$-variable function
+$$F(x_1,x_2,...,x_n) = x_1^n + ... + x_n^n - n x_1 ... x_n$$
+One has
+$$\frac{\partial F}{\partial x_i} = n x_i^{n-1} - n \frac{x_1 ... x_n}{x_i}$$
+and so $F$ achieves minimum at either the boundary of the region for $(x_1,...,x_n)$ i.e. when one of the $x_i = 0$ by viewing as the infinite cube $(0,+\infty) \times ... \times (0,+\infty)$ or when $x_i = \sqrt[n-1]{\frac{x_1 ... x_n}{x_i}}$ for all $i$, equivalently when $x_1 = x_2 = ... = x_n$ for if say $x_1 \geq x_2, ..., x_n$ is the minimum and $x_1 < x_i$ for some $i$ then clearly $\sqrt[n-1]{x_2 ... x_n} > x_1$. Obviously $F(x_1, ..., 0, ..., x_n) >= 0$.
+
+Thus, $F$ achieves minimum value 0 when all variables are equal.
+
+\end{document}
