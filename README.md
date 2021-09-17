@@ -5,4 +5,4 @@ When I was in high school, I invented a method to solve many high school math ol
 
 The method is considered *elementary* even though the term "elementary" doesn't have a precise definition since high school nowsaday don't teach basic calculus and derivatives anymore (in the US, they still do in the UK) and back in Newton's days, calculus is considered advanced maths and it is still being an actively research area.
 
-In this repository, I proved some inequality arising from research such as [the triangle inequality for logarithm distance](https://arxiv.org/abs/1110.1773) of Survit Sra (MIT) in 2013 and the triangle inequality for another similar distance by [Hoa Dinh](https://trunghoamath.wordpress.com/) using the function method.
+In this repository, I proved some inequality arising from research such as the triangle inequality for logarithm distance (see Theorem 3.1 in https://arxiv.org/abs/1110.1773) of Survit Sra (MIT) in Proceeding of the AMS (2013) and the triangle inequality for another similar distance (see https://arxiv.org/pdf/1910.10447.pdf) in Advances in Math (2021) using the function method.

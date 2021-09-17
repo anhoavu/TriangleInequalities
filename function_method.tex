@@ -35,7 +35,14 @@ with equality happens only when $x_1 = x_2 = ... = x_n$.
 \end{thm}
 Note that actually, we only need positive when $n$ is odd. When $n$ is even, we can apply the inequality to $|x_i|$ in place of $x_i$.
 
-The proof is to use mathematical induction. Here is the function perspective: For fixed $x_2, ..., x_n > 0$, let us can consider the function
+The smart proof of this inequality is to do a \textbf{backward mathematical induction}. Here is how it works: We show that
+\begin{itemize}
+\item [(i)] if the inequality is true for $n$ then it is true for $2n$ numbers so if it is true for $n = 1$ (obvious in case of AM-GM) then it is true for $2, 4, ..., 2^k, ...$ numbers; and
+\item [(ii)] if the inequality is true for $n$ numbers then it is true for $n-1$ numbers. (This is where backward comes in.)
+\end{itemize}
+So for any $n$, there will be a $k$ such that $2^k > n$. By (i) the inequality is true for $2^k$ numbers. Then by (ii) it is true for $2^k - 1$ numbers, and then by (ii) again, it is true for $2^k - 2$ numbers, etc. So eventually, it is true for $n$ numbers.
+
+Another proof is to use standard mathematical induction. Here is the function perspective: For fixed $x_2, ..., x_n > 0$, let us can consider the function
 $$F(x_1) = x_1^n + ... + x_n^n - n x_1 ... x_n$$
 of a single variable $x_1$. This function is differentiable for all $x_1$. One has
 $$F'(x_1) = n x_1^{n-1} - n x_2 ... x_n$$
